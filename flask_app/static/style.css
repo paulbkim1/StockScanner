@@ -1,0 +1,31 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    width: auto;
+}
+
+body h1{
+    text-align: center;
+    width: 100%;
+    margin: 2% 0;
+    font-size: 60px;
+}
+
+#content {
+    margin: 0 15%;
+    display: flex;
+    gap: 12%;
+}
+
+.container {
+    padding: 40px;
+    background-color: grey;
+    border-radius: 8%;
+}
+
+h2 {
+    text-align: center;
+}

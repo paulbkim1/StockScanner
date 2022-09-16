@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Tracker</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <h1>Stock Tracker</h1>
+    <div id="content">
+        <div class="container">
+            <h2>Register</h2>
+            <form action="/register" method="post">
+                {% for i in get_flashed_messages(category_filter = ["first_name"]) %}
+                <p>{{ i }}</p>
+                {% endfor %}
+                <div class="form-group">
+                    <label for="first_name">First name:</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name">
+                </div>
+                {% for i in get_flashed_messages(category_filter = ["last_name"]) %}
+                <p>{{ i }}</p>
+                {% endfor %}
+                <div class="form-group">
+                    <label for="last_name">Last name:</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name">
+                </div>
+                {% for i in get_flashed_messages(category_filter = ["email", "email_taken"]) %}
+                <p>{{ i }}</p>
+                {% endfor %}
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                {% for i in get_flashed_messages(category_filter = ["password"]) %}
+                <p>{{ i }}</p>
+                {% endfor %}
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password:</label>
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+
+        <div class="container">
+            <h2>Login</h2>
+            <form action="/login" method="post">
+                <div class="form-group">
+                    {% for i in get_flashed_messages(category_filter = ["log"]) %}
+                <p>{{ i }}</p>
+                {% endfor %}
+                    <label for="login_email">Email:</label>
+                    <input type="email" class="form-control" id="login_email" name="login_email">
+                </div>
+                <div class="form-group">
+                    <label for="login_password">Password:</label>
+                    <input type="password" class="form-control" id="login_password" name="login_password">
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

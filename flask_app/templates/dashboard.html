@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Tracker</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user_page.css') }}">
+</head>
+<body>
+    <div id="left-container">
+        <a href="/dashboard">Home</a>
+        <a href="#">Stocks on the Move</a>
+        <a href="#">Stock Screener</a>
+        <a href="#">Watchlist</a>
+        <a href="/logout">Logout</a>
+    </div>
+    <div id="right-container">
+        <div id="header-container">
+            <div id="header">
+                <h1>Welcome !</h1>
+                <form action="", method="post">
+                    <input type="search" name="search_stock" placeholder="Look up stock or symbol">
+                    <button>Search</button>
+                </form>
+            </div>
+        </div>
+        <div id="content">
+            <div id="box-left">
+                <div></div>
+                <div></div>
+            </div>
+            <div id="box-right">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
