@@ -5,8 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Tracker</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user_page.css') }}">
 </head>
 <body>
-    
+    <div id="left-container">
+        <a href="/dashboard">Home</a>
+        <a href="#">Stocks on the Move</a>
+        <a href="#">Stock Screener</a>
+        <a href="#">Watchlist</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <div id="right-container">
+        <div id="header-container">
+            <div id="header">
+                <h1>Welcome !</h1>
+                <form action="/search", method="post">
+                    <input type="search" name="search_stock" placeholder="Look up stock or symbol">
+                    <button>Search</button>
+                </form>
+            </div>
+        </div>
+
+        <h2>Watchlist</h2>
+        <table>
+            <tr>
+                <th>Remove</th>
+                <th>Symbol</th>
+                <th>Price</th>
+                <th>% Change</th>
+                <th>Volume</th>
+            </tr>
+            {% for i in current_watchlist %}
+            <tr>
+                <td>{{ i.symbol }}</td>
+                <td>{%  %}</td>
+                <td>{{ }}</td>
+                <td>
+        </table>
+    </div>
 </body>
 </html>

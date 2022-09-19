@@ -5,8 +5,226 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Tracker</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user_page.css') }}">
 </head>
 <body>
-    
+    <div id="left-container">
+        <a href="/dashboard">Home</a>
+        <a href="#">Stocks on the Move</a>
+        <a href="#">Stock Screener</a>
+        <a href="/watchlist">Watchlist</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <div id="right-container">
+        <div id="header-container">
+            <div id="header">
+                <h1>Welcome !</h1>
+                <form action="/search", method="post">
+                    <input type="search" name="search_stock" placeholder="Look up stock or symbol">
+                    <button>Search</button>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <h2>({{ stock_history.symbol }})</h2>
+                {% for i in get_flashed_messages(category_filter = ["watchlist"]) %}
+                <p>{{ i }}</p>
+                {% endfor %}
+                <form action="/watchlist/add">
+                    <input type="submit" value="Add to Watchlist">
+                </form>
+            </div>
+            <div id="content">
+                <div class="box-left">
+                    <h3>Equity Data</h3>
+                    <div class="stock-row">
+                        <p>Description:</p>
+                        <p>{{ search_data.TSLA.description}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Exchange:</p>
+                        <p>${{ search_data.TSLA.exchange}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Asset Type:</p>
+                        <p>{{ search_data.TSLA.assetType}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>52 Week High:</p>
+                        <p>${{ search_data.TSLA.fundamental.high52}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>52 Week Low:</p>
+                        <p>${{ search_data.TSLA.fundamental.low52}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Dividend Amount:</p>
+                        <p>${{ search_data.TSLA.fundamental.dividendAmount}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Dividend Yield:</p>
+                        <p>${{ search_data.TSLA.fundamental.dividendYield}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Dividend Date:</p>
+                        <p>${{ search_data.TSLA.fundamental.dividendDate}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Price-Earnings Ratio:</p>
+                        <p>${{ search_data.TSLA.fundamental.peRatio}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Net Profit Margin:</p>
+                        <p>${{ search_data.TSLA.fundamental.netProfitMarginTTM}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Return on Equity:</p>
+                        <p>${{ search_data.TSLA.fundamental.returnOnEquity}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Return on Assets:</p>
+                        <p>${{ search_data.TSLA.fundamental.returnOnAssets}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Return on Investment:</p>
+                        <p>${{ search_data.TSLA.fundamental.returnOnInvestment}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Total Debt to Capital:</p>
+                        <p>${{ search_data.TSLA.fundamental.totalDebtToCapital}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Shares Outstanding:</p>
+                        <p>${{ search_data.TSLA.fundamental.sharesOutstanding}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Market Cap Float:</p>
+                        <p>${{ search_data.TSLA.fundamental.marketCapFloat}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Market Cap:</p>
+                        <p>${{ search_data.TSLA.fundamental.marketCap}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Book Value Per Share:</p>
+                        <p>${{ search_data.TSLA.fundamental.bookValuePerShare}}</p>
+                    </div>
+                </div>
+
+                <div class="box-right">
+                    <h3>Today's Performance</h3>
+                    <div class="stock-row">
+                        <p>Last Price:</p>
+                        <p>${{ _data.lastPrice }}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Bid Price:</p>
+                        <p>${{ current_data.bidPrice }}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Bid Size:</p>
+                        <p>${{ current_data.bidSize }}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Ask Price:</p>
+                        <p>${{ current_data.askPrice }}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Ask Size:</p>
+                        <p>${{ current_data.askSize }}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Last Size:</p>
+                        <p>${{ current_data.lastSize }}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Open Price:</p>
+                        <p>${{ current_data.openPrice }}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>high Price:</p>
+                        <p>${{ current_data.highPrice }}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Low Price:</p>
+                        <p>${{ current_data.lowPrice }}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Close Price:</p>
+                        <p>${{ current_data.closePrice }}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Net Change:</p>
+                        <p>${{ current_data.netChange }}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Total Volume:</p>
+                        <p>${{ current_data.totalVolume }}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Mark:</p>
+                        <p>${{ current_data.mark }}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Close Price:</p>
+                        <p>${{ current_data.closePrice }}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Marginable:</p>
+                        <p>${{ current_data.marginable }}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Shortable:</p>
+                        <p>${{ current_data.shortable }}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Volatility:</p>
+                        <p>${{ current_data.volatility }}</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+            </div>
+            <div id="content">
+                <div class="box-left">
+                    <div class="stock-row">
+                        <p>% Change:</p>
+                        <p> {% set open = stock_history.candles[0].open %}
+                            {% set close = stock_history.candles[-1].close %} 
+                            {% set change = (close - open) / open * 100 %}
+                            {{ '%0.2f' % change | float }}%
+                        </p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Volume:</p>
+                        <p> {% set total_volume = namespace(c = 0)%}
+                            {% for i in stock_history.candles %}
+                            {% set total_volume.c = total_volume.c + i.volume %}
+                            {% endfor %}
+                            {{ total_volume.c }}
+                            
+                        </p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Lowest Price:</p>
+                        <p> {% set low = namespace(c = 0)%}
+                            {% set low = [] %}
+                            {% for i in stock_history.candles %}
+                            {{ low.append(i.low) }}
+                            {% endfor %}
+                            {{ low.c }}
+                        </p>
+                    </div>
+                </div>
+                <div class="box-right">
+                    <div>xczv</div>
+                    <div>xczv</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

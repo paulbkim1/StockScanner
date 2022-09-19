@@ -12,7 +12,7 @@ body {
 
 #left-container{
     flex: 1;
-    background-color: rgb(206, 206, 206);
+    background-color: rgb(230, 230, 230);
     height: 100vh;
     margin-left: -8px;
     margin-top: -8px;
@@ -24,7 +24,7 @@ body {
 
 #left-container a{
     text-decoration: none;
-    font-size: 1.5vw;
+    font-size: 1.4vw;
     margin: 15% 10%;
     text-align: center;
 }
@@ -34,29 +34,33 @@ body {
 }
 
 #header-container{
-    background-color: antiquewhite;
-    margin: -8px -8px 2% 0;
+    background-color: rgb(149, 241, 232);
+    margin: -13px -8px 0 0;
 }
 
 #header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 6%;
+    margin: 0 9%;
 }
 
 #header h1 {
-    font-size: 3vw;
+    font-size: 3.2vw;
 }
 
 #header button {
-    padding: 20px;
+    width: 4vw;
+    border: 2px solid black;
+    font-size: .8vw;
+    padding: 2%;
 }
 #header input {
-    width: 9vw;
-    height: 4vh;
-    border: 2px solid black;
-    
+    width: 13vw;
+    border: 1px solid black;
+    font-size: .8vw;
+    padding: 2%;
+    border-radius: 10px;
 }
 
 
@@ -66,15 +70,43 @@ body {
 #content{
     display: flex;
     gap: 10%;
-    margin: 5% 6% 3% 6%;
+    margin: 5% 9% 3% 9%;
 }
 
-#box-left{
+#right-container h2 {
+    font-size: 2.5vw;
+    text-align: center;
+}
+
+#content h3 {
+    font-size: 2.5vw;
+    text-align: center;
+}
+
+.box-left{
     flex: 1;
     border: 3px solid black;
 }
 
-#box-right{
+.box-right{
     flex: 1;
     border: 3px solid black;
 }
+
+.box-left h3 {
+    margin-bottom: 10%;
+}
+
+.stock-row {
+    width:30vw;
+    display: flex;
+    /* border-bottom: 2px solid black; */
+    /* margin: -10px 0 -40px 20px; */
+    border: 3px solid black;
+}
+
+.stock-row p {
+    font-size: 1.2vw;
+    justify-content: space-between;
+}
+

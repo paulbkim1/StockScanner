@@ -12,27 +12,82 @@
         <a href="/dashboard">Home</a>
         <a href="#">Stocks on the Move</a>
         <a href="#">Stock Screener</a>
-        <a href="#">Watchlist</a>
+        <a href="/watchlist">Watchlist</a>
         <a href="/logout">Logout</a>
     </div>
     <div id="right-container">
         <div id="header-container">
             <div id="header">
                 <h1>Welcome !</h1>
-                <form action="", method="post">
+                <form action="/search", method="post">
                     <input type="search" name="search_stock" placeholder="Look up stock or symbol">
                     <button>Search</button>
                 </form>
             </div>
         </div>
+        <h2>Today's Movers</h2>
         <div id="content">
-            <div id="box-left">
-                <div></div>
-                <div></div>
+            <div class="box-left">
+                <h3>S&P 500</h3>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Symbol</th>
+                        <th>Last Price</th>
+                        <th>% Change</th>
+                        <th>Total Volume</th>
+                    </tr>
+                    {% for i in sp500_movers %}
+                    <tr>
+                        <td>{{ i.description }}</td>
+                        <td>{{ i.symbol }} </td>
+                        <td>{{ i.last }}</td>
+                        <td>{{ i.change }}</td>
+                        <td>{{ i.totalVolume }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                
+                <h3>DOW JONES INDUSTRIAL AVERAGE</h3>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Symbol</th>
+                        <th>Last Price</th>
+                        <th>% Change</th>
+                        <th>Total Volume</th>
+                    </tr>
+                    {% for i in dow_movers %}
+                    <tr>
+                        <td>{{ i.description }}</td>
+                        <td>{{ i.symbol }} </td>
+                        <td>{{ i.last }}</td>
+                        <td>{{ i.change }}</td>
+                        <td>{{ i.totalVolume }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
             </div>
-            <div id="box-right">
-                <div></div>
-                <div></div>
+            <div class="box-right">
+                <h3>NASDAQ</h3>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Symbol</th>
+                        <th>Last Price</th>
+                        <th>% Change</th>
+                        <th>Total Volume</th>
+                    </tr>
+                    {% for i in nasdaq_movers %}
+                    <tr>
+                        <td>{{ i.description }}</td>
+                        <td>{{ i.symbol }} </td>
+                        <td>{{ i.last }}</td>
+                        <td>{{ i.change }}</td>
+                        <td>{{ i.totalVolume }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
             </div>
         </div>
     </div>
