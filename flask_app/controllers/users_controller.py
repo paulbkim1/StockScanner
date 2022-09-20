@@ -48,7 +48,7 @@ def all_recipes():
     if not "login_id" in session:
         return redirect('/')
 
-    sp500_api = 'https://api.tdameritrade.com/v1/marketdata/{SPX.X}/movers'
+    sp500_api = 'https://api.tdameritrade.com/v1/marketdata/$SPX.X/movers'
     sp500_params = {
         'apikey' : 'AO4GMA6ZKRXWCUYQUMHRWI61MAE6ZAE6',
         'direction' : 'up',
@@ -57,7 +57,7 @@ def all_recipes():
     sp500_content = requests.get(url = sp500_api, params = sp500_params)
     sp500_movers = sp500_content.json()
 
-    nasdaq_api = 'https://api.tdameritrade.com/v1/marketdata/{COMPX}/movers'
+    nasdaq_api = 'https://api.tdameritrade.com/v1/marketdata/$COMPX/movers'
     nasdaq_params = {
         'apikey' : 'AO4GMA6ZKRXWCUYQUMHRWI61MAE6ZAE6',
         'direction' : 'up',
@@ -66,7 +66,7 @@ def all_recipes():
     nasdaq_content = requests.get(url = nasdaq_api, params = nasdaq_params)
     nasdaq_movers = nasdaq_content.json()
 
-    dow_api = 'https://api.tdameritrade.com/v1/marketdata/{DJI}/movers'
+    dow_api = 'https://api.tdameritrade.com/v1/marketdata/$DJI/movers'
     dow_params = {
         'apikey' : 'AO4GMA6ZKRXWCUYQUMHRWI61MAE6ZAE6',
         'direction' : 'up',
@@ -90,15 +90,6 @@ def stock_info():
     if not "login_id" in session:
         return redirect('/')
 
-    instant_api = r'https://api.tdameritrade.com/v1/marketdata/{}/quotes'.format(session['stock_search']['search_stock'])
-    instant_param = {
-        'apikey' : 'AO4GMA6ZKRXWCUYQUMHRWI61MAE6ZAE6'
-        }
-    todays_data = requests.get(url = instant_api, params = instant_param)
-    current_data = todays_data.json()
-    one_data = next(iter(current_data))
-    print(current_data)
-
     search_api = 'https://api.tdameritrade.com/v1/instruments'
     search_param = {
         'apikey' : 'AO4GMA6ZKRXWCUYQUMHRWI61MAE6ZAE6',
@@ -107,7 +98,19 @@ def stock_info():
         }
     search_info = requests.get(url = search_api, params = search_param)
     search_data = search_info.json()
-    # print(search_data)
+    stock_symbol = session['stock_search']['search_stock']
+    history_data_info = search_data[stock_symbol]
+    history_data = search_data[stock_symbol]['fundamental']
+    print(history_data)
+
+    instant_api = r'https://api.tdameritrade.com/v1/marketdata/{}/quotes'.format(session['stock_search']['search_stock'])
+    instant_param = {
+        'apikey' : 'AO4GMA6ZKRXWCUYQUMHRWI61MAE6ZAE6'
+        }
+    current_data = requests.get(url = instant_api, params = instant_param)
+    todays_data = current_data.json()
+    live_data = todays_data[stock_symbol]
+    # print(current_data)
 
     history_api = r'https://api.tdameritrade.com/v1/marketdata/{}/pricehistory'.format(session['stock_search']['search_stock'])
     history_param = {
@@ -124,4 +127,4 @@ def stock_info():
 
     # fig = go.Figure(data = go.Scatter( x = list(stock_history['candles'].0.values('datetime')), y = [1,2,3,4,], mode = 'lines' ))
     # fig.show()
-    return render_template('stock_info.html', stock_history = stock_history, current_data = current_data, one_data = one_data, search_data = search_data)
+    return render_template('stock_info.html', history_data = history_data, history_data_info = history_data_info, live_data = live_data, search_data = search_data)

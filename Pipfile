@@ -10,6 +10,8 @@ flask-bcrypt = "*"
 requests = "*"
 plotly = "*"
 yfinance = "*"
+pandas = "*"
+openpyxl = "*"
 
 [dev-packages]
 

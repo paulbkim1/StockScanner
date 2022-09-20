@@ -17,5 +17,8 @@ def watchlist_add():
 
 @app.route('/watchlist')
 def watchlist_page():
+    if not "login_id" in session:
+        return redirect('/')
+
     current_watchlist = Watchlists.view_watchlist(session['login_id'])
     return render_template('watchlist.html', current_watchlist = current_watchlist)

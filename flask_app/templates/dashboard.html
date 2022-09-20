@@ -42,7 +42,9 @@
                         <td>{{ i.description }}</td>
                         <td>{{ i.symbol }} </td>
                         <td>{{ i.last }}</td>
-                        <td>{{ i.change }}</td>
+                        {% set decimal = i.change %} 
+                        {% set change = decimal * 100 %}
+                        <td>{{ '%0.2f' % change | float }}%</td>
                         <td>{{ i.totalVolume }}</td>
                     </tr>
                     {% endfor %}
@@ -62,7 +64,9 @@
                         <td>{{ i.description }}</td>
                         <td>{{ i.symbol }} </td>
                         <td>{{ i.last }}</td>
-                        <td>{{ i.change }}</td>
+                        {% set decimal = i.change %} 
+                        {% set change = decimal * 100 %}
+                        <td>{{ '%0.2f' % change | float }}%</td>
                         <td>{{ i.totalVolume }}</td>
                     </tr>
                     {% endfor %}
@@ -83,7 +87,9 @@
                         <td>{{ i.description }}</td>
                         <td>{{ i.symbol }} </td>
                         <td>{{ i.last }}</td>
-                        <td>{{ i.change }}</td>
+                        {% set decimal = i.change %} 
+                        {% set change = decimal * 100 %}
+                        <td>{{ '%0.2f' % change | float }}%</td>
                         <td>{{ i.totalVolume }}</td>
                     </tr>
                     {% endfor %}

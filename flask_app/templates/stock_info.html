@@ -29,7 +29,7 @@
 
         <div>
             <div>
-                <h2>({{ stock_history.symbol }})</h2>
+                <h2>({{ history_data.symbol }})</h2>
                 {% for i in get_flashed_messages(category_filter = ["watchlist"]) %}
                 <p>{{ i }}</p>
                 {% endfor %}
@@ -42,75 +42,75 @@
                     <h3>Equity Data</h3>
                     <div class="stock-row">
                         <p>Description:</p>
-                        <p>{{ search_data.TSLA.description}}</p>
+                        <p>${{ history_data_info['description'] }}</p>
                     </div>
                     <div class="stock-row">
                         <p>Exchange:</p>
-                        <p>${{ search_data.TSLA.exchange}}</p>
+                        <p>${{ history_data_info['exchange'] }}</p>
                     </div>
                     <div class="stock-row">
                         <p>Asset Type:</p>
-                        <p>{{ search_data.TSLA.assetType}}</p>
+                        <p>${{ history_data_info['assetType'] }}</p>
                     </div>
                     <div class="stock-row">
                         <p>52 Week High:</p>
-                        <p>${{ search_data.TSLA.fundamental.high52}}</p>
+                        <p>${{ history_data['high52'] }}</p>
                     </div>
                     <div class="stock-row">
                         <p>52 Week Low:</p>
-                        <p>${{ search_data.TSLA.fundamental.low52}}</p>
+                        <p>${{ history_data['low52'] }}</p>
                     </div>
                     <div class="stock-row">
                         <p>Dividend Amount:</p>
-                        <p>${{ search_data.TSLA.fundamental.dividendAmount}}</p>
+                        <p>${{ history_data['dividendAmount'] }}</p>
                     </div>
                     <div class="stock-row">
                         <p>Dividend Yield:</p>
-                        <p>${{ search_data.TSLA.fundamental.dividendYield}}</p>
+                        <p>${{ history_data['dividendYield'] }}</p>
                     </div>
                     <div class="stock-row">
                         <p>Dividend Date:</p>
-                        <p>${{ search_data.TSLA.fundamental.dividendDate}}</p>
+                        <p>${{ history_data['dividendDate'] }}</p>
                     </div>
                     <div class="stock-row">
                         <p>Price-Earnings Ratio:</p>
-                        <p>${{ search_data.TSLA.fundamental.peRatio}}</p>
+                        <p>${{ history_data['peRatio'] }}</p>
                     </div>
                     <div class="stock-row">
                         <p>Net Profit Margin:</p>
-                        <p>${{ search_data.TSLA.fundamental.netProfitMarginTTM}}</p>
+                        <p>${{ history_data['netProfitMarginTTM'] }}</p>
                     </div>
                     <div class="stock-row">
                         <p>Return on Equity:</p>
-                        <p>${{ search_data.TSLA.fundamental.returnOnEquity}}</p>
+                        <p>${{ history_data['returnOnEquity'] }}</p>
                     </div>
                     <div class="stock-row">
                         <p>Return on Assets:</p>
-                        <p>${{ search_data.TSLA.fundamental.returnOnAssets}}</p>
+                        <p>${{ history_data['returnOnAssets'] }}</p>
                     </div>
                     <div class="stock-row">
                         <p>Return on Investment:</p>
-                        <p>${{ search_data.TSLA.fundamental.returnOnInvestment}}</p>
+                        <p>${{ history_data['returnOnInvestment'] }}</p>
                     </div>
                     <div class="stock-row">
                         <p>Total Debt to Capital:</p>
-                        <p>${{ search_data.TSLA.fundamental.totalDebtToCapital}}</p>
+                        <p>${{ history_data['totalDebtToCapital'] }}</p>
                     </div>
                     <div class="stock-row">
                         <p>Shares Outstanding:</p>
-                        <p>${{ search_data.TSLA.fundamental.sharesOutstanding}}</p>
+                        <p>${{ history_data['sharesOutstanding'] }}</p>
                     </div>
                     <div class="stock-row">
                         <p>Market Cap Float:</p>
-                        <p>${{ search_data.TSLA.fundamental.marketCapFloat}}</p>
+                        <p>${{ history_data['marketCapFloat'] }}</p>
                     </div>
                     <div class="stock-row">
                         <p>Market Cap:</p>
-                        <p>${{ search_data.TSLA.fundamental.marketCap}}</p>
+                        <p>${{ history_data['marketCap'] }}</p>
                     </div>
                     <div class="stock-row">
                         <p>Book Value Per Share:</p>
-                        <p>${{ search_data.TSLA.fundamental.bookValuePerShare}}</p>
+                        <p>${{ history_data['bookValuePerShare'] }}</p>
                     </div>
                 </div>
 
@@ -118,71 +118,75 @@
                     <h3>Today's Performance</h3>
                     <div class="stock-row">
                         <p>Last Price:</p>
-                        <p>${{ _data.lastPrice }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Bid Price:</p>
-                        <p>${{ current_data.bidPrice }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Bid Size:</p>
-                        <p>${{ current_data.bidSize }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Ask Price:</p>
-                        <p>${{ current_data.askPrice }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Ask Size:</p>
-                        <p>${{ current_data.askSize }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Last Size:</p>
-                        <p>${{ current_data.lastSize }}</p>
+                        <p>${{live_data['lastPrice']}}</p>
                     </div>
                     <div class="stock-row">
                         <p>Open Price:</p>
-                        <p>${{ current_data.openPrice }}</p>
+                        <p>${{live_data['openPrice']}}</p>
                     </div>
                     <div class="stock-row">
                         <p>high Price:</p>
-                        <p>${{ current_data.highPrice }}</p>
+                        <p>${{live_data['highPrice']}}</p>
                     </div>
                     <div class="stock-row">
                         <p>Low Price:</p>
-                        <p>${{ current_data.lowPrice }}</p>
+                        <p>${{live_data['lowPrice']}}</p>
                     </div>
                     <div class="stock-row">
                         <p>Close Price:</p>
-                        <p>${{ current_data.closePrice }}</p>
+                        <p>${{live_data['closePrice']}}</p>
                     </div>
                     <div class="stock-row">
                         <p>Net Change:</p>
-                        <p>${{ current_data.netChange }}</p>
+                        <p>${{live_data['netChange']}}</p>
                     </div>
                     <div class="stock-row">
                         <p>Total Volume:</p>
-                        <p>${{ current_data.totalVolume }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Mark:</p>
-                        <p>${{ current_data.mark }}</p>
+                        <p>${{live_data['totalVolume']}}</p>
                     </div>
                     <div class="stock-row">
                         <p>Close Price:</p>
-                        <p>${{ current_data.closePrice }}</p>
+                        <p>${{live_data['closePrice']}}</p>
                     </div>
                     <div class="stock-row">
-                        <p>Marginable:</p>
-                        <p>${{ current_data.marginable }}</p>
+                        <p>Bid Price:</p>
+                        <p>${{live_data['bidPrice']}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Bid Size:</p>
+                        <p>${{live_data['bidSize']}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Ask Price:</p>
+                        <p>${{live_data['askPrice']}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Ask Size:</p>
+                        <p>${{live_data['AskSize']}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Last Size:</p>
+                        <p>${{live_data['lastSize']}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Net Change:</p>
+                        <p>${{live_data['netChange']}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Total Volume:</p>
+                        <p>${{live_data['totalVolume']}}</p>
+                    </div>
+                    <div class="stock-row">
+                        <p>Close Price:</p>
+                        <p>${{live_data['closePrice']}}</p>
                     </div>
                     <div class="stock-row">
                         <p>Shortable:</p>
-                        <p>${{ current_data.shortable }}</p>
+                        <p>${{live_data['shortable']}}</p>
                     </div>
                     <div class="stock-row">
                         <p>Volatility:</p>
-                        <p>${{ current_data.volatility }}</p>
+                        <p>${{live_data['volatility']}}</p>
                     </div>
                 </div>
             </div>
@@ -191,32 +195,6 @@
             <div id="content">
                 <div class="box-left">
                     <div class="stock-row">
-                        <p>% Change:</p>
-                        <p> {% set open = stock_history.candles[0].open %}
-                            {% set close = stock_history.candles[-1].close %} 
-                            {% set change = (close - open) / open * 100 %}
-                            {{ '%0.2f' % change | float }}%
-                        </p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Volume:</p>
-                        <p> {% set total_volume = namespace(c = 0)%}
-                            {% for i in stock_history.candles %}
-                            {% set total_volume.c = total_volume.c + i.volume %}
-                            {% endfor %}
-                            {{ total_volume.c }}
-                            
-                        </p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Lowest Price:</p>
-                        <p> {% set low = namespace(c = 0)%}
-                            {% set low = [] %}
-                            {% for i in stock_history.candles %}
-                            {{ low.append(i.low) }}
-                            {% endfor %}
-                            {{ low.c }}
-                        </p>
                     </div>
                 </div>
                 <div class="box-right">
