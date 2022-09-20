@@ -35,6 +35,7 @@ def algo():
                     if algo_data[i]['lastPrice'] > 1.10 and algo_data[i]['lastPrice'] < 150.00:
                         if algo_data[i]['bidSize'] > 1000:
                             if algo_data[i]['volatility'] > .2:
-                                final.append(i)
+                                if (algo_data[i]['lastPrice'] + .10) > algo_data[i]['openPrice']:
+                                    final.append(i)
     print(final)
     print(len(final))
