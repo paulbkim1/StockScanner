@@ -10,8 +10,8 @@
 <body>
     <div id="left-container">
         <a href="/dashboard">Home</a>
-        <a href="#">Stocks on the Move</a>
-        <a href="#">Stock Screener</a>
+        <a href="/stocks_on_the_move">Stocks on the Move</a>
+        <a href="/screener1">Stock Screener</a>
         <a href="/watchlist">Watchlist</a>
         <a href="/logout">Logout</a>
     </div>
@@ -40,7 +40,7 @@
                     {% for i in sp500_movers %}
                     <tr>
                         <td>{{ i.description }}</td>
-                        <td>{{ i.symbol }} </td>
+                        <td><a href="/link/search/{{ i.symbol }}">{{ i.symbol }}</a></td>
                         <td>{{ i.last }}</td>
                         {% set decimal = i.change %} 
                         {% set change = decimal * 100 %}
@@ -62,7 +62,7 @@
                     {% for i in dow_movers %}
                     <tr>
                         <td>{{ i.description }}</td>
-                        <td>{{ i.symbol }} </td>
+                        <td><a href="/link/search/{{ i.symbol }}">{{ i.symbol }}</a></td>
                         <td>{{ i.last }}</td>
                         {% set decimal = i.change %} 
                         {% set change = decimal * 100 %}
@@ -72,6 +72,7 @@
                     {% endfor %}
                 </table>
             </div>
+
             <div class="box-right">
                 <h3>NASDAQ</h3>
                 <table>
@@ -85,7 +86,7 @@
                     {% for i in nasdaq_movers %}
                     <tr>
                         <td>{{ i.description }}</td>
-                        <td>{{ i.symbol }} </td>
+                        <td><a href="/link/search/{{ i.symbol }}">{{ i.symbol }}</a></td>
                         <td>{{ i.last }}</td>
                         {% set decimal = i.change %} 
                         {% set change = decimal * 100 %}

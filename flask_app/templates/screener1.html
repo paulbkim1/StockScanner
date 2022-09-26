@@ -5,8 +5,49 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Tracker</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user_page.css') }}">
 </head>
 <body>
-    
+    <div id="left-container">
+        <a href="/dashboard">Home</a>
+        <a href="/stocks_on_the_move">Stocks on the Move</a>
+        <a href="/screener1">Stock Screener</a>
+        <a href="/watchlist">Watchlist</a>
+        <a href="/logout">Logout</a>
+    </div>
+    <div id="right-container">
+        <div id="header-container">
+            <div id="header">
+                <h1>Welcome !</h1>
+                <form action="/search", method="post">
+                    <input type="search" name="search_stock" placeholder="Look up stock or symbol">
+                    <button>Search</button>
+                </form>
+            </div>
+        </div>
+
+        <h2>Stock Screener</h2>
+        <div id="screener">
+            <form action="/screener/search", method="post">
+                <div id="parameters">
+                    <div id="parameters-border">
+                        <h3>Price:</h3>
+                        <input type="number" name="low_price"min="0" max="1000">
+                        <p>-</p>
+                        <input type="number" name="high_price"min=".01" max="1000">
+                        <h3>Volume:</h3>
+                        <input type="number" name="low_volume"min="0" max="10000000000">
+                        <p>-</p>
+                        <input type="number" name="high_volume"min="1" max="10000000000">
+                        <h3>Net Change:</h3>
+                        <input type="number" name="low_change"min="-1000" max="999">
+                        <p>-</p>
+                        <input type="number" name="high_change"min="-999" max="1000">
+                    </div>
+                </div>
+                <input type="submit" value="Search">
+            </form>
+        </div>
+    </div>
 </body>
 </html>

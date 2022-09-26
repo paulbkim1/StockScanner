@@ -1,6 +1,5 @@
 from flask_app import DATABASE
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask_app.models import users_model
 
 class Watchlists:
     def __init__(self, data):
@@ -12,32 +11,25 @@ class Watchlists:
 
     @classmethod
     def check_watchlist(cls,data):
-        query = "SELECT * FROM watchlists WHERE symbol = %(data)s;"
+        query = "SELECT * FROM watchlists WHERE symbol = %(symbol)s;"
         results = connectToMySQL(DATABASE).query_db(query,data)
-        if results == True:
-            return False
+        if len(results) > 0:
+            return True
+        return False
 
     @classmethod
-    def add_watchlist(cls,data):
-        query = "INSERT INTO watchlists (symbol, user_id) VALUES ('symbol', 'user_id');"
-        return connectToMySQL(DATABASE).query_db(query,data)
+    def add_watchlist(cls,data2):
+        query = "INSERT INTO watchlists (symbol, user_id) VALUES (%(symbol)s, %(user_id)s);"
+        return connectToMySQL(DATABASE).query_db(query,data2)
 
     @classmethod
     def view_watchlist(cls,data):
-        query = "SELECT symbol FROM watchlists JOIN users ON users.id = user_id WHERE user_id = %(id)s;"
-        results = connectToMySQL(DATABASE).query_db(query)
+        query = 'SELECT symbol FROM watchlists WHERE user_id = %(user_id)s;'
+        results = connectToMySQL(DATABASE).query_db(query,data)
         if len(results) > 0:
-            all_watchlists = []
-            for i in results:
-                this_watchlist = cls(i)
-                user_data = {
-                    **i,
-                    'id' : i['users.id'],
-                    'created_at' : i['users.created_at'],
-                    'updated_at' : i['users.updated_at']
-                }
-                this_watchlist = users_model.Users(user_data)
-                this_watchlist.planner = this_watchlist
-                all_watchlists.append(this_watchlist)
-            return all_watchlists
-        return []
+            return results
+
+    @classmethod
+    def delete_watchlist(cls,data):
+        query = "DELETE FROM watchlists WHERE symbol = %(symbol)s;"
+        return connectToMySQL(DATABASE).query_db(query,data)

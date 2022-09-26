@@ -5,8 +5,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Tracker</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user_page.css') }}">
 </head>
 <body>
-    
+    <div id="left-container">
+        <a href="/dashboard">Home</a>
+        <a href="/stocks_on_the_move">Stocks on the Move</a>
+        <a href="/screener1">Stock Screener</a>
+        <a href="/watchlist">Watchlist</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <div id="right-container">
+        <div id="header-container">
+            <div id="header">
+                <h1>Welcome !</h1>
+                <form action="/search", method="post">
+                    <input type="search" name="search_stock" placeholder="Look up stock or symbol">
+                    <button>Search</button>
+                </form>
+            </div>
+        </div>
+
+        <h2>Stocks on the Move</h2>
+        <table>
+            <tr>
+                <th>Symbol</th>
+                <th>Price</th>
+                <th>Volume</th>
+                <th>Time</th>
+                <th>Comments</th>
+            </tr>
+            {% for i in list_of_movers %}
+            <tr>
+            <td><a href="/link/search/{{ i.symbol }}">{{ i.symbol }}</a></td>
+                <td>${{ i.price }}</td>
+                <td>{{ i.volume }}</td>
+                <td>{{ i.created_at }}</td>
+                <td>
+                    <form action="/add_comments" method="post">
+                        <textarea name="comments" cols="50" rows="4">{{ i.comments }}</textarea>
+                        <button type="submit" name="id" value="{{ i.id }}">Save</button>
+                    </form>
+                </td>
+                <td><a href="/delete_comments/{{ i.id }}">Remove</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 </body>
 </html>

@@ -10,8 +10,8 @@
 <body>
     <div id="left-container">
         <a href="/dashboard">Home</a>
-        <a href="#">Stocks on the Move</a>
-        <a href="#">Stock Screener</a>
+        <a href="/stocks_on_the_move">Stocks on the Move</a>
+        <a href="/screener1">Stock Screener</a>
         <a href="/watchlist">Watchlist</a>
         <a href="/logout">Logout</a>
     </div>
@@ -33,7 +33,7 @@
                 {% for i in get_flashed_messages(category_filter = ["watchlist"]) %}
                 <p>{{ i }}</p>
                 {% endfor %}
-                <form action="/watchlist/add">
+                <form action="/watchlist/add" id="search-form">
                     <input type="submit" value="Add to Watchlist">
                 </form>
             </div>
@@ -188,18 +188,6 @@
                         <p>Volatility:</p>
                         <p>${{live_data['volatility']}}</p>
                     </div>
-                </div>
-            </div>
-            <div>
-            </div>
-            <div id="content">
-                <div class="box-left">
-                    <div class="stock-row">
-                    </div>
-                </div>
-                <div class="box-right">
-                    <div>xczv</div>
-                    <div>xczv</div>
                 </div>
             </div>
         </div>

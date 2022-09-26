@@ -10,9 +10,9 @@
 <body>
     <div id="left-container">
         <a href="/dashboard">Home</a>
-        <a href="#">Stocks on the Move</a>
-        <a href="#">Stock Screener</a>
-        <a href="#">Watchlist</a>
+        <a href="/stocks_on_the_move">Stocks on the Move</a>
+        <a href="/screener1">Stock Screener</a>
+        <a href="/watchlist">Watchlist</a>
         <a href="/logout">Logout</a>
     </div>
 
@@ -33,15 +33,18 @@
                 <th>Remove</th>
                 <th>Symbol</th>
                 <th>Price</th>
-                <th>% Change</th>
+                <th>Net Change</th>
                 <th>Volume</th>
             </tr>
-            {% for i in current_watchlist %}
+            {% for i in watchlists %}
             <tr>
-                <td>{{ i.symbol }}</td>
-                <td>{%  %}</td>
-                <td>{{ }}</td>
-                <td>
+                <td><a href="/delete_watchlist/{{ watchlists[i]['symbol'] }}">remove</a></td>
+                <td><a href="/link/search/{{ watchlists[i]['symbol'] }}">{{ watchlists[i]['symbol'] }}</td></a>
+                <td>{{ watchlists[i]['lastPrice'] }}</td>
+                <td>{{ watchlists[i]['netChange'] }}</td>
+                <td>{{ watchlists[i]['totalVolume'] }}</td>
+            </tr>
+            {% endfor %}
         </table>
     </div>
 </body>

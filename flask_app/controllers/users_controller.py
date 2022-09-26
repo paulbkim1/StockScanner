@@ -1,15 +1,18 @@
 from flask_app import app
 from flask import render_template, request, session, redirect, flash
 from flask_app.models.users_model import Users
+from flask_app.models.movers_model import Movers
 from flask_bcrypt import Bcrypt
 import requests
-import plotly.graph_objects as go
+import pandas as pd
+import time
 
 bcrypt = Bcrypt(app)
 
 @app.route('/')
 def login_page():
     return render_template('login.html')
+
 
 @app.route('/register', methods = ['POST'])
 def register_info():
@@ -22,6 +25,7 @@ def register_info():
     }
     session['login_id'] = Users.register_user(data)
     return redirect('/dashboard')
+
 
 @app.route('/login', methods = ['POST'])
 def login_info():
@@ -38,13 +42,15 @@ def login_info():
     session['login_id'] = user_from_db.id
     return redirect('/dashboard')
 
+
 @app.route('/logout')
 def logout():
     del session['login_id']
     return redirect('/')
 
+
 @app.route('/dashboard')
-def all_recipes():
+def todays_movers():
     if not "login_id" in session:
         return redirect('/')
 
@@ -76,6 +82,8 @@ def all_recipes():
     dow_movers = dow_content.json()
     return render_template('dashboard.html', sp500_movers = sp500_movers, nasdaq_movers = nasdaq_movers, dow_movers = dow_movers)
 
+
+
 @app.route('/search', methods = ['POST'])
 def search():
     if 'stock_search' in session:
@@ -84,6 +92,7 @@ def search():
     stock_search_info = request.form
     session['stock_search'] = stock_search_info
     return redirect('/stock_info')
+
 
 @app.route('/stock_info')
 def stock_info():
@@ -101,7 +110,7 @@ def stock_info():
     stock_symbol = session['stock_search']['search_stock']
     history_data_info = search_data[stock_symbol]
     history_data = search_data[stock_symbol]['fundamental']
-    print(history_data)
+    # print(history_data)
 
     instant_api = r'https://api.tdameritrade.com/v1/marketdata/{}/quotes'.format(session['stock_search']['search_stock'])
     instant_param = {
