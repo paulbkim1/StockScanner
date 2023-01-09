@@ -8,59 +8,36 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user_page.css') }}">
 </head>
 <body>
-    <div id="left-container">
-        <a href="/dashboard">Home</a>
-        <a href="/stocks_on_the_move">Stocks on the Move</a>
-        <a href="/screener1">Stock Screener</a>
-        <a href="/watchlist">Watchlist</a>
-        <a href="/logout">Logout</a>
-    </div>
-    <div id="right-container">
-        <div id="header-container">
-            <div id="header">
-                <h1>Welcome !</h1>
-                <form action="/search", method="post">
-                    <input type="search" name="search_stock" placeholder="Look up stock or symbol">
-                    <button>Search</button>
-                </form>
-            </div>
+    <div id="nav-bar" >
+        <h1>Welcome!</h1>
+        <div id="nav-bar-links">
+            <a href="/dashboard">Home</a>
+            <a href="/screener1">Stock Screener</a>
+            <a href="/watchlist">Watchlist</a>
+            <a href="/logout">Logout</a>
         </div>
-        <h2>Today's Movers</h2>
-        <div id="content">
-            <div class="box-left">
-                <h3>S&P 500</h3>
+        <form action="/search", method="post">
+            <input type="search" name="search_stock" placeholder="Look up stock or symbol">
+            <button>Search</button>
+        </form>
+    </div>
+
+
+    <h2 id="dashboard-title">Today's Movers</h2>
+    <div id="content">
+        <div class="content-box-left">
+            <div class="dashboard-content-container">
+                <h3 class="table-title">S&P 500</h3>
                 <table>
                     <tr>
                         <th>Name</th>
                         <th>Symbol</th>
                         <th>Last Price</th>
-                        <th>% Change</th>
+                        <th>%&nbspChange</th>
                         <th>Total Volume</th>
                     </tr>
                     {% for i in sp500_movers %}
-                    <tr>
-                        <td>{{ i.description }}</td>
-                        <td><a href="/link/search/{{ i.symbol }}">{{ i.symbol }}</a></td>
-                        <td>{{ i.last }}</td>
-                        {% set decimal = i.change %} 
-                        {% set change = decimal * 100 %}
-                        <td>{{ '%0.2f' % change | float }}%</td>
-                        <td>{{ i.totalVolume }}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-                
-                <h3>DOW JONES INDUSTRIAL AVERAGE</h3>
-                <table>
-                    <tr>
-                        <th>Name</th>
-                        <th>Symbol</th>
-                        <th>Last Price</th>
-                        <th>% Change</th>
-                        <th>Total Volume</th>
-                    </tr>
-                    {% for i in dow_movers %}
-                    <tr>
+                    <tr class="movers-table-row">
                         <td>{{ i.description }}</td>
                         <td><a href="/link/search/{{ i.symbol }}">{{ i.symbol }}</a></td>
                         <td>{{ i.last }}</td>
@@ -72,9 +49,34 @@
                     {% endfor %}
                 </table>
             </div>
+            <div id="dashboard-dow" class="dashboard-content-container">
+                <h3 id="dow-table" class="table-title">DOW JONES INDUSTRIAL AVERAGE</h3>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Symbol</th>
+                        <th>Last Price</th>
+                        <th>%&nbspChange</th>
+                        <th>Total Volume</th>
+                    </tr>
+                    {% for i in dow_movers %}
+                    <tr class="movers-table-row">
+                        <td>{{ i.description }}</td>
+                        <td><a href="/link/search/{{ i.symbol }}">{{ i.symbol }}</a></td>
+                        <td>{{ i.last }}</td>
+                        {% set decimal = i.change %} 
+                        {% set change = decimal * 100 %}
+                        <td>{{ '%0.2f' % change | float }}%</td>
+                        <td>{{ i.totalVolume }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
 
-            <div class="box-right">
-                <h3>NASDAQ</h3>
+        <div class="content-box-right">
+            <div class="dashboard-content-container">
+                <h3 class="table-title">NASDAQ</h3>
                 <table>
                     <tr>
                         <th>Name</th>
@@ -84,11 +86,11 @@
                         <th>Total Volume</th>
                     </tr>
                     {% for i in nasdaq_movers %}
-                    <tr>
+                    <tr class="movers-table-row">
                         <td>{{ i.description }}</td>
                         <td><a href="/link/search/{{ i.symbol }}">{{ i.symbol }}</a></td>
                         <td>{{ i.last }}</td>
-                        {% set decimal = i.change %} 
+                        {% set decimal = i.change %}
                         {% set change = decimal * 100 %}
                         <td>{{ '%0.2f' % change | float }}%</td>
                         <td>{{ i.totalVolume }}</td>

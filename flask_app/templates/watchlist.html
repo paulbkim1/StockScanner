@@ -8,26 +8,22 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user_page.css') }}">
 </head>
 <body>
-    <div id="left-container">
-        <a href="/dashboard">Home</a>
-        <a href="/stocks_on_the_move">Stocks on the Move</a>
-        <a href="/screener1">Stock Screener</a>
-        <a href="/watchlist">Watchlist</a>
-        <a href="/logout">Logout</a>
+    <div id="nav-bar" >
+        <h1>Welcome!</h1>
+        <div id="nav-bar-links">
+            <a href="/dashboard">Home</a>
+            <a href="/screener1">Stock Screener</a>
+            <a href="/watchlist">Watchlist</a>
+            <a href="/logout">Logout</a>
+        </div>
+        <form action="/search", method="post">
+            <input type="search" name="search_stock" placeholder="Look up stock or symbol">
+            <button>Search</button>
+        </form>
     </div>
 
-    <div id="right-container">
-        <div id="header-container">
-            <div id="header">
-                <h1>Welcome !</h1>
-                <form action="/search", method="post">
-                    <input type="search" name="search_stock" placeholder="Look up stock or symbol">
-                    <button>Search</button>
-                </form>
-            </div>
-        </div>
-
-        <h2>Watchlist</h2>
+    <div id="watchlist-container">
+        <h2 class="header-title">Watchlist</h2>
         <table>
             <tr>
                 <th>Remove</th>
@@ -37,7 +33,7 @@
                 <th>Volume</th>
             </tr>
             {% for i in watchlists %}
-            <tr>
+            <tr class="watchlist-row">
                 <td><a href="/delete_watchlist/{{ watchlists[i]['symbol'] }}">remove</a></td>
                 <td><a href="/link/search/{{ watchlists[i]['symbol'] }}">{{ watchlists[i]['symbol'] }}</td></a>
                 <td>{{ watchlists[i]['lastPrice'] }}</td>

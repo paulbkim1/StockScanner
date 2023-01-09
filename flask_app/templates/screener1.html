@@ -8,44 +8,66 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user_page.css') }}">
 </head>
 <body>
-    <div id="left-container">
-        <a href="/dashboard">Home</a>
-        <a href="/stocks_on_the_move">Stocks on the Move</a>
-        <a href="/screener1">Stock Screener</a>
-        <a href="/watchlist">Watchlist</a>
-        <a href="/logout">Logout</a>
-    </div>
-    <div id="right-container">
-        <div id="header-container">
-            <div id="header">
-                <h1>Welcome !</h1>
-                <form action="/search", method="post">
-                    <input type="search" name="search_stock" placeholder="Look up stock or symbol">
-                    <button>Search</button>
-                </form>
-            </div>
+    <div id="nav-bar" >
+        <h1>Welcome!</h1>
+        <div id="nav-bar-links">
+            <a href="/dashboard">Home</a>
+            <a href="/screener1">Stock Screener</a>
+            <a href="/watchlist">Watchlist</a>
+            <a href="/logout">Logout</a>
         </div>
+        <form action="/search", method="post">
+            <input type="search" name="search_stock" placeholder="Look up stock or symbol">
+            <button>Search</button>
+        </form>
+    </div>
 
-        <h2>Stock Screener</h2>
-        <div id="screener">
+    <div id="screener-container">
+        <h2 class="header-title">Stock Screener</h2>
+        <div id="screener-border">
             <form action="/screener/search", method="post">
-                <div id="parameters">
-                    <div id="parameters-border">
+                <div id="screener-content">
+                    <div class="screener-content-section">
                         <h3>Price:</h3>
-                        <input type="number" name="low_price"min="0" max="1000">
-                        <p>-</p>
-                        <input type="number" name="high_price"min=".01" max="1000">
+                        <div class="input-container">
+                            <div class="input-specific">
+                                <label for="low_price">Minimum Price:</label><br>
+                                <input type="number" id="low_price" name="low_price" min="0" max="10000">
+                            </div>
+                            <div class="input-specific">
+                                <label for="high_price">Maximum Price:</label><br>
+                                <input type="number" id="high_price" name="high_price" min="0" max="10000">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screener-content-section">
                         <h3>Volume:</h3>
-                        <input type="number" name="low_volume"min="0" max="10000000000">
-                        <p>-</p>
-                        <input type="number" name="high_volume"min="1" max="10000000000">
+                        <div class="input-container">
+                            <div class="input-specific">
+                                <label for="low_volume">Minimum Volume:</label><br>
+                                <input type="number" id="low_volume" name="low_volume" min="0" max="10000000000">
+                            </div>
+                            <div class="input-specific">
+                                <label for="high_volume">Maximum Volume:</label><br>
+                                <input type="number" id="high_volume" name="high_volume" min="1" max="10000000000">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screener-content-section">
                         <h3>Net Change:</h3>
-                        <input type="number" name="low_change"min="-1000" max="999">
-                        <p>-</p>
-                        <input type="number" name="high_change"min="-999" max="1000">
+                        <div class="input-container">
+                            <div class="input-specific">
+                                <label for="low_change">Minimum Net Change:</label><br>
+                                <input type="number" id="high_change" name="low_change" min="-10000" max="9999">
+                            </div>
+                            <div class="input-specific">
+                                <label for="high_change">Maximum Net Change:</label><br>
+                                <input type="number" id="high_change" name="high_change" min="-9990" max="10000">
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <input type="submit" value="Search">
+                <input type="submit" id="screener-button" value="Search">
             </form>
         </div>
     </div>

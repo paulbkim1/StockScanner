@@ -6,32 +6,32 @@ import requests
 import pandas as pd
 import time
 
-@app.route('/stocks_on_the_move')
-def stocks_otm():
-    if not "login_id" in session:
-        return redirect('/')
-    data = {
-        'user_id' : session['login_id']
-    }
-    list_of_movers = Movers.movers_list(data)
-    return render_template('stocks_otm.html', list_of_movers = list_of_movers)
+# @app.route('/stocks_on_the_move')
+# def stocks_otm():
+#     if not "login_id" in session:
+#         return redirect('/')
+#     data = {
+#         'user_id' : session['login_id']
+#     }
+#     list_of_movers = Movers.movers_list(data)
+#     return render_template('stocks_otm.html', list_of_movers = list_of_movers)
 
 
-@app.route('/add_comments', methods = ['POST'])
-def add_comments():
-    data = {
-        **request.form
-    }
-    Movers.add_comment(data)
-    return redirect('/stocks_on_the_move')
+# @app.route('/add_comments', methods = ['POST'])
+# def add_comments():
+#     data = {
+#         **request.form
+#     }
+#     Movers.add_comment(data)
+#     return redirect('/stocks_on_the_move')
 
-@app.route('/delete_comments/<int:id>')
-def delete_comments(id):
-    data = {
-        'id' : id
-    }
-    Movers.delete_comment(data)
-    return redirect('/stocks_on_the_move')
+# @app.route('/delete_comments/<int:id>')
+# def delete_comments(id):
+#     data = {
+#         'id' : id
+#     }
+#     Movers.delete_comment(data)
+#     return redirect('/stocks_on_the_move')
 
 @app.route('/link/search/<symbol>')
 def link_search(symbol):

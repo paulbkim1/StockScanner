@@ -8,186 +8,164 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user_page.css') }}">
 </head>
 <body>
-    <div id="left-container">
-        <a href="/dashboard">Home</a>
-        <a href="/stocks_on_the_move">Stocks on the Move</a>
-        <a href="/screener1">Stock Screener</a>
-        <a href="/watchlist">Watchlist</a>
-        <a href="/logout">Logout</a>
+    <div id="nav-bar" >
+        <h1>Welcome!</h1>
+        <div id="nav-bar-links">
+            <a href="/dashboard">Home</a>
+            <a href="/screener1">Stock Screener</a>
+            <a href="/watchlist">Watchlist</a>
+            <a href="/logout">Logout</a>
+        </div>
+        <form action="/search", method="post">
+            <input type="search" name="search_stock" placeholder="Look up stock or symbol">
+            <button>Search</button>
+        </form>
     </div>
 
-    <div id="right-container">
-        <div id="header-container">
-            <div id="header">
-                <h1>Welcome !</h1>
-                <form action="/search", method="post">
-                    <input type="search" name="search_stock" placeholder="Look up stock or symbol">
-                    <button>Search</button>
-                </form>
-            </div>
+    <div>
+        <div id="info-header">
+            <h2 class="header-title">{{ history_data.symbol }}</h2>
+            {% for i in get_flashed_messages(category_filter = ["watchlist"]) %}
+            <p>{{ i }}</p>
+            {% endfor %}
+            <form action="/watchlist/add" id="watchlist-button">
+                <button type="submit">Add to Watchlist</button>
+            </form>
         </div>
-
-        <div>
-            <div>
-                <h2>({{ history_data.symbol }})</h2>
-                {% for i in get_flashed_messages(category_filter = ["watchlist"]) %}
-                <p>{{ i }}</p>
-                {% endfor %}
-                <form action="/watchlist/add" id="search-form">
-                    <input type="submit" value="Add to Watchlist">
-                </form>
-            </div>
-            <div id="content">
-                <div class="box-left">
-                    <h3>Equity Data</h3>
-                    <div class="stock-row">
-                        <p>Description:</p>
-                        <p>${{ history_data_info['description'] }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Exchange:</p>
-                        <p>${{ history_data_info['exchange'] }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Asset Type:</p>
-                        <p>${{ history_data_info['assetType'] }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>52 Week High:</p>
-                        <p>${{ history_data['high52'] }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>52 Week Low:</p>
-                        <p>${{ history_data['low52'] }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Dividend Amount:</p>
-                        <p>${{ history_data['dividendAmount'] }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Dividend Yield:</p>
-                        <p>${{ history_data['dividendYield'] }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Dividend Date:</p>
-                        <p>${{ history_data['dividendDate'] }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Price-Earnings Ratio:</p>
-                        <p>${{ history_data['peRatio'] }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Net Profit Margin:</p>
-                        <p>${{ history_data['netProfitMarginTTM'] }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Return on Equity:</p>
-                        <p>${{ history_data['returnOnEquity'] }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Return on Assets:</p>
-                        <p>${{ history_data['returnOnAssets'] }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Return on Investment:</p>
-                        <p>${{ history_data['returnOnInvestment'] }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Total Debt to Capital:</p>
-                        <p>${{ history_data['totalDebtToCapital'] }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Shares Outstanding:</p>
-                        <p>${{ history_data['sharesOutstanding'] }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Market Cap Float:</p>
-                        <p>${{ history_data['marketCapFloat'] }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Market Cap:</p>
-                        <p>${{ history_data['marketCap'] }}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Book Value Per Share:</p>
-                        <p>${{ history_data['bookValuePerShare'] }}</p>
-                    </div>
+        <div id="info-container">
+            <div class="box-left">
+                <h3 class="info-title">Equity Data</h3>
+                <div class="info-stock-row">
+                    <p>Description:&nbsp</p>
+                    <p>{{ history_data_info['description'] }}</p>
                 </div>
+                <div class="info-stock-row">
+                    <p>Exchange:&nbsp</p>
+                    <p>{{ history_data_info['exchange'] }}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Asset Type:&nbsp</p>
+                    <p>{{ history_data_info['assetType'] }}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>52 Week High:&nbsp</p>
+                    <p>${{ history_data['high52'] }}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>52 Week Low:&nbsp</p>
+                    <p>${{ history_data['low52'] }}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Dividend Amount:&nbsp</p>
+                    <p>${{ history_data['dividendAmount'] }}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Dividend Yield:&nbsp</p>
+                    <p>${{ history_data['dividendYield'] }}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Price-Earnings Ratio:&nbsp</p>
+                    <p>{{ history_data['peRatio'] }}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Net Profit Margin:&nbsp</p>
+                    <p>${{ history_data['netProfitMarginTTM'] }}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Return on Equity:&nbsp</p>
+                    <p>${{ history_data['returnOnEquity'] }}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Return on Assets:&nbsp</p>
+                    <p>${{ history_data['returnOnAssets'] }}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Return on Investment:&nbsp</p>
+                    <p>${{ history_data['returnOnInvestment'] }}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Total Debt to Capital:&nbsp</p>
+                    <p>${{ history_data['totalDebtToCapital'] }}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Shares Outstanding:&nbsp</p>
+                    <p>{{ history_data['sharesOutstanding'] }}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Market Cap Float:&nbsp</p>
+                    <p>{{ history_data['marketCapFloat'] }}M</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Market Cap:&nbsp</p>
+                    <p>{{ history_data['marketCap'] }}M</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Book Value Per Share:&nbsp</p>
+                    <p>${{ history_data['bookValuePerShare'] }}</p>
+                </div>
+            </div>
 
-                <div class="box-right">
-                    <h3>Today's Performance</h3>
-                    <div class="stock-row">
-                        <p>Last Price:</p>
-                        <p>${{live_data['lastPrice']}}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Open Price:</p>
-                        <p>${{live_data['openPrice']}}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>high Price:</p>
-                        <p>${{live_data['highPrice']}}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Low Price:</p>
-                        <p>${{live_data['lowPrice']}}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Close Price:</p>
-                        <p>${{live_data['closePrice']}}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Net Change:</p>
-                        <p>${{live_data['netChange']}}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Total Volume:</p>
-                        <p>${{live_data['totalVolume']}}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Close Price:</p>
-                        <p>${{live_data['closePrice']}}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Bid Price:</p>
-                        <p>${{live_data['bidPrice']}}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Bid Size:</p>
-                        <p>${{live_data['bidSize']}}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Ask Price:</p>
-                        <p>${{live_data['askPrice']}}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Ask Size:</p>
-                        <p>${{live_data['AskSize']}}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Last Size:</p>
-                        <p>${{live_data['lastSize']}}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Net Change:</p>
-                        <p>${{live_data['netChange']}}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Total Volume:</p>
-                        <p>${{live_data['totalVolume']}}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Close Price:</p>
-                        <p>${{live_data['closePrice']}}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Shortable:</p>
-                        <p>${{live_data['shortable']}}</p>
-                    </div>
-                    <div class="stock-row">
-                        <p>Volatility:</p>
-                        <p>${{live_data['volatility']}}</p>
-                    </div>
+            <div class="box-right">
+                <h3 class="info-title">Today's Performance</h3>
+                <div class="info-stock-row">
+                    <p>Last Price:&nbsp</p>
+                    <p>${{live_data['lastPrice']}}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Open Price:&nbsp</p>
+                    <p>${{live_data['openPrice']}}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>high Price:&nbsp</p>
+                    <p>${{live_data['highPrice']}}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Low Price:&nbsp</p>
+                    <p>${{live_data['lowPrice']}}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Close Price:&nbsp</p>
+                    <p>${{live_data['closePrice']}}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Net Change:&nbsp</p>
+                    <p>${{live_data['netChange']}}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Total Volume:&nbsp</p>
+                    <p>{{live_data['totalVolume']}}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Bid Price:&nbsp</p>
+                    <p>${{live_data['bidPrice']}}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Bid Size:&nbsp</p>
+                    <p>{{live_data['bidSize']}}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Ask Price:&nbsp</p>
+                    <p>${{live_data['askPrice']}}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Ask Size:&nbsp</p>
+                    <p>{{live_data['AskSize']}}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Last Size:&nbsp</p>
+                    <p>{{live_data['lastSize']}}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Net Change:&nbsp</p>
+                    <p>${{live_data['netChange']}}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Shortable:&nbsp</p>
+                    <p>{{live_data['shortable']}}</p>
+                </div>
+                <div class="info-stock-row">
+                    <p>Volatility:&nbsp</p>
+                    <p>{{live_data['volatility']}}</p>
                 </div>
             </div>
         </div>

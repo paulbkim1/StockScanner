@@ -5,7 +5,6 @@ from flask_app.models.movers_model import Movers
 from flask_bcrypt import Bcrypt
 import requests
 import pandas as pd
-import time
 
 bcrypt = Bcrypt(app)
 
@@ -110,7 +109,6 @@ def stock_info():
     stock_symbol = session['stock_search']['search_stock']
     history_data_info = search_data[stock_symbol]
     history_data = search_data[stock_symbol]['fundamental']
-    # print(history_data)
 
     instant_api = r'https://api.tdameritrade.com/v1/marketdata/{}/quotes'.format(session['stock_search']['search_stock'])
     instant_param = {
@@ -119,7 +117,6 @@ def stock_info():
     current_data = requests.get(url = instant_api, params = instant_param)
     todays_data = current_data.json()
     live_data = todays_data[stock_symbol]
-    # print(current_data)
 
     history_api = r'https://api.tdameritrade.com/v1/marketdata/{}/pricehistory'.format(session['stock_search']['search_stock'])
     history_param = {
@@ -132,8 +129,5 @@ def stock_info():
         }
     history_content = requests.get(url = history_api, params = history_param)
     stock_history = history_content.json()
-    # print(stock_history['candles'])
 
-    # fig = go.Figure(data = go.Scatter( x = list(stock_history['candles'].0.values('datetime')), y = [1,2,3,4,], mode = 'lines' ))
-    # fig.show()
     return render_template('stock_info.html', history_data = history_data, history_data_info = history_data_info, live_data = live_data, search_data = search_data)
