@@ -1,7 +1,6 @@
 from flask_app import app
 from flask import render_template, request, session, redirect, flash
 from flask_app.models.users_model import Users
-from flask_app.models.movers_model import Movers
 from flask_bcrypt import Bcrypt
 import requests
 import pandas as pd
@@ -81,6 +80,17 @@ def todays_movers():
     dow_movers = dow_content.json()
     return render_template('dashboard.html', sp500_movers = sp500_movers, nasdaq_movers = nasdaq_movers, dow_movers = dow_movers)
 
+
+@app.route('/link/search/<symbol>')
+def link_search(symbol):
+    if 'stock_search' in session:
+        del session['stock_search']
+
+    data = {
+        'search_stock' : symbol
+    }
+    session['stock_search'] = data
+    return redirect('/stock_info')
 
 
 @app.route('/search', methods = ['POST'])

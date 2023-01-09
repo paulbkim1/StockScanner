@@ -2,7 +2,6 @@ from crypt import methods
 from flask_app import app
 from flask import render_template, request, session, redirect, flash
 from flask_app.models.watchlists_model import Watchlists
-from flask_app.models.movers_model import Movers
 import requests
 import pandas as pd
 import time
@@ -93,6 +92,8 @@ def search_screener():
                                     screen_data.append(algo_data[i])
     session['screener_data'] = screen_data
     return redirect('/screener2')
+
+
 
 @app.route('/screener2')
 def show_screener_results():
